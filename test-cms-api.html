@@ -1,0 +1,30 @@
+<html>
+  <head>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <body>
+    
+
+
+    <script>
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://cms.worldnow.com/v1.0/categories/search",
+        "method": "POST",
+        "headers": {
+          "content-type": "text/xml",
+          "authorization": "jsmith~mypwd~24",
+          "cache-control": "no-cache",
+          "postman-token": "7e1daf0e-cd6a-22d9-4b32-a4ca4a726cd2"
+        },
+        "data": "<categorysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r</categorysearchcriteria>"
+      }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+      </script>
+  </body>
+</html>
