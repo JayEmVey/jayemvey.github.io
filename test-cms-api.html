@@ -4,23 +4,24 @@
   </head>
   <body>
     <script>
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://cms.worldnow.com/v1.0/categories/search",
-      "method": "POST",
-      "headers": {
-        "content-type": "application/xml",
-        "authorization": "TLapiuser~frankly1~6",
-        "cache-control": "no-cache",
-        "postman-token": "015f97b4-8459-58b3-dc9c-6fbdc2a8e23d"
-      },
-      "data": "<categorysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r</categorysearchcriteria>"
-    }
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://cms.worldnow.com/v1.0/categories/search",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/xml",
+          "authorization": "TLapiuser~frankly1~6",
+          "access-control-allow-origin": "*",
+          "cache-control": "no-cache",
+          "postman-token": "3a5c6bf9-c000-9b3c-009a-589d8771e87b"
+        },
+        "data": "<categorysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r</categorysearchcriteria>"
+      }
 
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
       </script>
   </body>
 </html>
