@@ -1,0 +1,51 @@
+	<!DOCTYPE HTML>
+<html>
+<body>
+
+<a href="https://github.com/jpillora/xdomain">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+<h3>XDomain Demo</h3>
+<p>
+Cross-domain XHR access to Amazon (http://s3.amazonaws.com)<br>
+From '<span id="host"></span>'<br>
+</p>
+
+<script src="https://jpillora.com/xdomain/dist/xdomain.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<h5>Same domain: 'example/files/data1.json'</h5>
+<pre id='same'>Loading...</pre>
+
+<h5>Cross domain 'https://s3.amazonaws.com/jpillora-usa/data2.json'</h5>
+<p><i>XHRs will be intercepted and silently sent over to a hidden iframe</i></p>
+<pre id='cross'>Loading...</pre>
+
+<script type="text/javascript">
+//show current origin
+$("#host").html(xdomain.origin);
+//jquery ajax call
+$("#cross").load('https://s3.amazonaws.com/jpillora-usa/xdomain/data2.json');
+var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://cms.ddev1.worldnow.com/v1.0/stories/search",
+        "method": "POST",
+        "headers": {
+          "port": "443",
+          "content-type": "application/xml",
+          "authorization": "loan.admin~pQO/W65xV6SGrWb/V4PKZIjo5A6AtNtNZW+NWuzhE67CEmWY/miBtMst8oFZvWDEGLuumDSF+a9H9pDl2UJjpw==~6",
+          "cache-control": "no-cache",
+          "postman-token": "2f037c2f-0733-0d76-10c4-fe08835f2b24"
+        },
+        "data": "<storysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r    <pageno>5</pageno>\r    <pagesize>15</pagesize>\r    <statuses>\r        <status>Archive</status>\r        <status>Draft</status>\r    </statuses>\r</storysearchcriteria>"
+      }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+</script>
+
+</body>
+</html>
