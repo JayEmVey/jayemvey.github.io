@@ -7,21 +7,18 @@
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://cms.ddev1.worldnow.com/v1.0/stories/search",
+        "url": "https://story-importing-tool.herokuapp.com/categories",
         "method": "POST",
         "headers": {
-          "port": "443",
-          "content-type": "application/xml",
-          "authorization": "loan.admin~pQO/W65xV6SGrWb/V4PKZIjo5A6AtNtNZW+NWuzhE67CEmWY/miBtMst8oFZvWDEGLuumDSF+a9H9pDl2UJjpw==~6",
-          "cache-control": "no-cache",
-          "postman-token": "2f037c2f-0733-0d76-10c4-fe08835f2b24"
+          "Content-Type": "application/xml",
+          "AuthorizationToken": "i+Rh/WC9N39mkmkRJ5zgA1awDxIE/cg/ZadGqF1nhSc="
         },
-        "data": "<storysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r    <pageno>5</pageno>\r    <pagesize>15</pagesize>\r    <statuses>\r        <status>Archive</status>\r        <status>Draft</status>\r    </statuses>\r</storysearchcriteria>"
+        "data": "<categorysearchcriteria xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://api.worldnow.com/cms\">\r    <affiliateid>6</affiliateid>\r</categorysearchcriteria>"
       }
-
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
       </script>
   </body>
 </html>
