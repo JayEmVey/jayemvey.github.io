@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Willkai | Expert Aluminum & Glass Solutions</title>
+    <title id="page-title">Willkai Window | Expert Aluminum & Glass Solutions</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +24,8 @@
         .text-willkai-pink { color: #009ED6; }
         .border-willkai-pink { border-color: #009ED6; }
         html { scroll-behavior: smooth; }
+        
+        /* Animation styles */
         .scroll-animate {
             opacity: 0;
             transform: translateY(20px);
@@ -33,6 +35,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+
         /* Language switcher styles */
         .lang-switcher button {
             padding: 4px 8px;
@@ -43,6 +46,28 @@
         .lang-switcher button.active {
             background-color: #005F87;
             color: white;
+        }
+
+        /* Hero Section Background Image and Overlay */
+        #welcome {
+            position: relative;
+            background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/refs/heads/master/test/examples/assets/ChatGPT%20Image%2013_15_23%207%20thg%207%2C%202025.png');
+            background-size: cover;
+            background-position: center center;
+        }
+        #welcome::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 95, 135, 0.8); /* willkai-blue with 80% opacity */
+            z-index: 1;
+        }
+        #welcome .container {
+            position: relative;
+            z-index: 2;
         }
     </style>
 </head>
@@ -62,6 +87,7 @@
                     <a href="#welcome" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_home">Home</a>
                     <a href="#features" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_about">About</a>
                     <a href="#work-process" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_process">Process</a>
+                    <a href="#featured-projects" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_projects">Projects</a>
                     <a href="#testimonials" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_testimonials">Testimonials</a>
                     <a href="#contact-us" class="bg-willkai-pink text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition duration-300" data-lang="nav_contact">Contact Us</a>
                     <!-- Language Switcher (Desktop) -->
@@ -83,6 +109,7 @@
             <a href="#welcome" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_home_mobile">Home</a>
             <a href="#features" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_about_mobile">About</a>
             <a href="#work-process" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_process_mobile">Process</a>
+            <a href="#featured-projects" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_projects_mobile">Projects</a>
             <a href="#testimonials" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_testimonials_mobile">Testimonials</a>
             <a href="#contact-us" class="block mt-2 bg-willkai-pink text-white font-bold py-2 px-6 rounded-full text-center" data-lang="nav_contact_mobile">Contact Us</a>
             <!-- Language Switcher (Mobile) -->
@@ -95,18 +122,11 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Welcome Area Start ***** -->
-    <section id="welcome" class="bg-willkai-blue text-white pt-24 pb-16">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4" data-lang="welcome_title">Expert Aluminum & Glass Solutions<span class="text-willkai-pink"> for Modern Construction</span></h1>
-                    <p class="text-lg md:text-xl text-gray-300 mb-8" data-lang="welcome_subtitle">We work with contractors, architects, and investors to deliver high-quality facade systems and installations—on time, with precision.</p>
-                    <a href="#contact-us" class="bg-willkai-pink text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 text-lg" data-lang="welcome_button">Discover More</a>
-                </div>
-                <div class="lg:w-1/2 flex justify-center">
-                    <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/refs/heads/master/test/examples/assets/ChatGPT%20Image%2013_15_23%207%20thg%207%2C%202025.png" alt="Modern building facade with glass and aluminum" class="rounded-lg shadow-2xl">
-                </div>
-            </div>
+    <section id="welcome" class="text-white pt-32 pb-24">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4" data-lang="welcome_title">Expert Aluminum & Glass Solutions<span class="text-willkai-pink"> for Modern Construction</span></h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto" data-lang="welcome_subtitle">We work with contractors, architects, and investors to deliver high-quality facade systems and installations—on time, with precision.</p>
+            <a href="#contact-us" class="bg-willkai-pink text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 text-lg" data-lang="welcome_button">Discover More</a>
         </div>
     </section>
     <!-- ***** Welcome Area End ***** -->
@@ -187,6 +207,51 @@
     </section>
     <!-- ***** Work Process End ***** -->
 
+    <!-- ***** Featured Projects Start ***** -->
+    <section id="featured-projects" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="projects_title">Featured Projects</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="projects_subtitle">Explore a selection of our completed projects that showcase our commitment to quality and excellence.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden scroll-animate">
+                    <img src="https://placehold.co/400x300/009ED6/FFFFFF?text=Project+1" alt="Office Building" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="project1_title">Office Building</h3>
+                        <p class="text-gray-600" data-lang="project1_location">Bien Hoa, Hoc Mon</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden scroll-animate" style="transition-delay: 150ms;">
+                    <img src="https://placehold.co/400x300/009ED6/FFFFFF?text=Project+2" alt="Commercial Center" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="project2_title">Commercial Center</h3>
+                        <p class="text-gray-600" data-lang="project2_location">Binh Trong</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden scroll-animate" style="transition-delay: 300ms;">
+                    <img src="https://placehold.co/400x300/009ED6/FFFFFF?text=Project+3" alt="ZLăt Factory" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="project3_title">ZLăt Factory</h3>
+                        <p class="text-gray-600" data-lang="project3_location">Binh Trieu</p>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden scroll-animate" style="transition-delay: 450ms;">
+                    <img src="https://placehold.co/400x300/009ED6/FFFFFF?text=Project+4" alt="Modern Hotel" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="project4_title">Modern Hotel</h3>
+                        <p class="text-gray-600" data-lang="project4_location">Modern</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Featured Projects End ***** -->
+
     <!-- ***** Fun Facts Start ***** -->
     <section id="fun-facts" class="py-20 bg-willkai-pink text-white">
         <div class="container mx-auto px-6">
@@ -246,18 +311,23 @@
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="contact_subtitle">Have a project in mind? Contact Willkai Window Co., Ltd. to request a quote or learn more about our services.</p>
             </div>
             <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg scroll-animate">
-                <form action="#" method="POST">
+                <!-- This form will open the user's default email client. For a more robust solution, a backend service like Formspree or Netlify Forms is recommended. -->
+                <form action="mailto:quy.nguyen@willkaiwindow.com.vn" method="POST" enctype="text/plain">
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 font-bold mb-2" data-lang="form_name">Full Name</label>
-                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
+                        <input type="text" id="name" name="Full Name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 font-bold mb-2" data-lang="form_email">Email Address</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
+                        <input type="email" id="email" name="Email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-700 font-bold mb-2" data-lang="form_phone">Phone Number</label>
+                        <input type="tel" id="phone" name="Phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink">
                     </div>
                     <div class="mb-6">
                         <label for="message" class="block text-gray-700 font-bold mb-2" data-lang="form_message">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required></textarea>
+                        <textarea id="message" name="Message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required></textarea>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="w-full bg-willkai-pink text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 text-lg" data-lang="form_button">Send Message</button>
@@ -288,8 +358,8 @@
             const translations = {
                 en: {
                     page_title: "Willkai | Expert Aluminum & Glass Solutions",
-                    nav_home: "Home", nav_about: "About", nav_process: "Process", nav_testimonials: "Testimonials", nav_contact: "Contact Us",
-                    nav_home_mobile: "Home", nav_about_mobile: "About", nav_process_mobile: "Process", nav_testimonials_mobile: "Testimonials", nav_contact_mobile: "Contact Us",
+                    nav_home: "Home", nav_about: "About", nav_process: "Process", nav_projects: "Projects", nav_testimonials: "Testimonials", nav_contact: "Contact Us",
+                    nav_home_mobile: "Home", nav_about_mobile: "About", nav_process_mobile: "Process", nav_projects_mobile: "Projects", nav_testimonials_mobile: "Testimonials", nav_contact_mobile: "Contact Us",
                     welcome_title: 'Expert Aluminum & Glass Solutions<span class="text-willkai-pink"> for Modern Construction</span>',
                     welcome_subtitle: "We work with contractors, architects, and investors to deliver high-quality facade systems and installations—on time, with precision.",
                     welcome_button: "Discover More",
@@ -309,6 +379,12 @@
                     step2_desc: "Our team proposes optimal aluminum and glass system solutions, tailored for efficient installation, durability, and architectural appeal.",
                     step3_title: "Fabrication & Installation",
                     step3_desc: "We execute with precision—manufacturing high-quality components and delivering rapid, on-site installation to meet demanding timelines.",
+                    projects_title: "Featured Projects",
+                    projects_subtitle: "Explore a selection of our completed projects that showcase our commitment to quality and excellence.",
+                    project1_title: "Office Building", project1_location: "Bien Hoa, Hoc Mon",
+                    project2_title: "Commercial Center", project2_location: "Binh Trong",
+                    project3_title: "ZLăt Factory", project3_location: "Binh Trieu",
+                    project4_title: "Modern Hotel", project4_location: "Modern",
                     fact1: "Projects", fact2: "Happy Clients", fact3: "Awards Wins", fact4: "Countries",
                     testimonials_title: "What Our Clients Say",
                     testimonial1_quote: '"Working with Willkai transformed our approach to market entry. Their insights were invaluable and led to a 200% increase in our quarterly growth. Highly recommended!"',
@@ -317,13 +393,13 @@
                     testimonial2_name: "Johnathan L.", testimonial2_title: "COO, Future Forward Inc.",
                     contact_title: "Get In Touch",
                     contact_subtitle: "Have a project in mind? Contact Willkai Window Co., Ltd. to request a quote or learn more about our services.",
-                    form_name: "Full Name", form_email: "Email Address", form_message: "Message", form_button: "Send Message",
+                    form_name: "Full Name", form_email: "Email Address", form_phone: "Phone Number", form_message: "Message", form_button: "Send Message",
                     footer_copyright: "&copy; 2025 WillKai. All Rights Reserved."
                 },
                 vi: {
                     page_title: "Willkai | Giải Pháp Nhôm Kính Chuyên Nghiệp",
-                    nav_home: "Trang Chủ", nav_about: "Về Chúng Tôi", nav_process: "Quy Trình", nav_testimonials: "Khách Hàng Nói Gì", nav_contact: "Liên Hệ",
-                    nav_home_mobile: "Trang Chủ", nav_about_mobile: "Về Chúng Tôi", nav_process_mobile: "Quy Trình", nav_testimonials_mobile: "Khách Hàng Nói Gì", nav_contact_mobile: "Liên Hệ",
+                    nav_home: "Trang Chủ", nav_about: "Về Chúng Tôi", nav_process: "Quy Trình", nav_projects: "Dự Án", nav_testimonials: "Khách Hàng Nói Gì", nav_contact: "Liên Hệ",
+                    nav_home_mobile: "Trang Chủ", nav_about_mobile: "Về Chúng Tôi", nav_process_mobile: "Quy Trình", nav_projects_mobile: "Dự Án", nav_testimonials_mobile: "Khách Hàng Nói Gì", nav_contact_mobile: "Liên Hệ",
                     welcome_title: 'Giải Pháp Nhôm Kính Chuyên Nghiệp<span class="text-willkai-pink"> cho Xây Dựng Hiện Đại</span>',
                     welcome_subtitle: "Chúng tôi hợp tác với các nhà thầu, kiến trúc sư và nhà đầu tư để cung cấp các hệ thống và lắp đặt mặt dựng chất lượng cao—đúng tiến độ, với độ chính xác cao.",
                     welcome_button: "Khám Phá Thêm",
@@ -343,6 +419,12 @@
                     step2_desc: "Đội ngũ của chúng tôi đề xuất các giải pháp hệ thống nhôm kính tối ưu, được thiết kế để lắp đặt hiệu quả, bền bỉ và có tính thẩm mỹ kiến trúc.",
                     step3_title: "Chế Tạo & Lắp Đặt",
                     step3_desc: "Chúng tôi thực hiện với độ chính xác cao—sản xuất các bộ phận chất lượng cao và lắp đặt nhanh chóng tại công trường để đáp ứng các tiến độ khắt khe.",
+                    projects_title: "Dự Án Tiêu Biểu",
+                    projects_subtitle: "Khám phá một số dự án đã hoàn thành của chúng tôi, thể hiện cam kết về chất lượng và sự xuất sắc.",
+                    project1_title: "Tòa Nhà Văn Phòng", project1_location: "Biên Hòa, Hóc Môn",
+                    project2_title: "Trung Tâm Thương Mại", project2_location: "Bình Trọng",
+                    project3_title: "Nhà Máy Kéo ZLăt", project3_location: "Bình Triệu",
+                    project4_title: "Khách Sạn Hiện Đại", project4_location: "Hiện đại",
                     fact1: "Dự Án", fact2: "Khách Hàng Hài Lòng", fact3: "Giải Thưởng", fact4: "Quốc Gia",
                     testimonials_title: "Khách Hàng Nói Gì Về Chúng Tôi",
                     testimonial1_quote: '"Hợp tác với Willkai đã thay đổi cách tiếp cận của chúng tôi. Những hiểu biết của họ là vô giá và đã giúp chúng tôi tăng trưởng 200% hàng quý. Rất khuyến khích!"',
@@ -351,7 +433,7 @@
                     testimonial2_name: "Anh Johnathan L.", testimonial2_title: "COO, Công Ty Tiên Phong Tương Lai",
                     contact_title: "Liên Hệ",
                     contact_subtitle: "Bạn có dự án cần triển khai? Hãy liên hệ Willkai Window Co., Ltd. để yêu cầu báo giá hoặc tìm hiểu thêm về dịch vụ của chúng tôi.",
-                    form_name: "Họ và Tên", form_email: "Địa Chỉ Email", form_message: "Lời Nhắn", form_button: "Gửi Tin Nhắn",
+                    form_name: "Họ và Tên", form_email: "Địa Chỉ Email", form_phone: "Số Điện Thoại", form_message: "Lời Nhắn", form_button: "Gửi Tin Nhắn",
                     footer_copyright: "&copy; 2025 WillKai. Bảo lưu mọi quyền."
                 }
             };
