@@ -69,6 +69,122 @@
             position: relative;
             z-index: 2;
         }
+
+        /* New Carousel Styles */
+        #features .carousel-viewport {
+            position: relative;
+            width: 100%;
+            height: 450px; /* Adjust height as needed */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #features .carousel-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #features .carousel-slide {
+            position: absolute;
+            width: 60%; /* Width of the active slide */
+            height: 90%; /* Height of the active slide */
+            border-radius: 1rem;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        #features .carousel-slide .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+            color: white;
+            text-align: left;
+        }
+        #features .carousel-slide .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        #features .carousel-slide .slide-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Slide states */
+        #features .carousel-slide.is-active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 20;
+            filter: blur(0px);
+        }
+        #features .carousel-slide.is-prev {
+            transform: translateX(-40%) scale(0.8);
+            opacity: 0.6;
+            z-index: 10;
+            filter: blur(4px);
+        }
+        #features .carousel-slide.is-next {
+            transform: translateX(40%) scale(0.8);
+            opacity: 0.6;
+            z-index: 10;
+            filter: blur(4px);
+        }
+        #features .carousel-slide:not(.is-active):not(.is-prev):not(.is-next) {
+            transform: scale(0.7);
+            opacity: 0;
+        }
+
+        /* New Navigation Styles */
+        #features .carousel-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 30;
+            padding: 0 1rem;
+        }
+        #features .carousel-button {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+        #features .carousel-button:hover {
+            transform: scale(1.1);
+        }
+        #features .carousel-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 30;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-color: rgba(0,0,0,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
     </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -131,36 +247,48 @@
     </section>
     <!-- ***** Welcome Area End ***** -->
 
-    <!-- ***** Features Start ***** -->
-    <section id="features" class="py-20 bg-gray-50">
+    <!-- ***** Features Start (Redesigned) ***** -->
+    <section id="features" class="py-20 bg-gray-50 overflow-hidden">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="features_title">What We Do</h2>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang="features_subtitle">At Willkai Window Co., Ltd., we specialize in aluminum and glass construction solutions tailored to meet the evolving needs of modern architecture and construction.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature Item 1 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate">
-                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+        </div>
+        
+        <div class="relative">
+            <div class="carousel-viewport">
+                <div class="carousel-track">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/alu.jpg');">
+                        <div class="slide-content">
+                            <h3 class="slide-title" data-lang="feature1_title_carousel">Aluminum Fabrication & Installation</h3>
+                            <p class="slide-desc" data-lang="feature1_desc_carousel">Precision-engineered aluminum systems for facades, windows, and structural components.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature1_title">Aluminum Fabrication & Installation</h3>
-                    <p class="text-gray-600" data-lang="feature1_desc">Precision-engineered aluminum systems for facades, windows, and structural components, delivered with efficient implementation and rapid turnaround times.</p>
-                </div>
-                <!-- Feature Item 2 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate" style="transition-delay: 150ms;">
-                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/glass.jpg');">
+                        <div class="slide-content">
+                            <h3 class="slide-title" data-lang="feature2_title_carousel">Glass Construction & Facade Systems</h3>
+                            <p class="slide-desc" data-lang="feature2_desc_carousel">Innovative glass applications and curtain wall systems that enhance function and aesthetics.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature2_title">Glass Construction & Facade Systems</h3>
-                    <p class="text-gray-600" data-lang="feature2_desc">Innovative glass applications and curtain wall systems that enhance both function and aesthetics, designed for high-performance building envelopes.</p>
-                </div>
-                <!-- Feature Item 3 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate" style="transition-delay: 300ms;">
-                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/custom-prj.jpg');">
+                         <div class="slide-content">
+                            <h3 class="slide-title" data-lang="feature3_title_carousel">Custom Project Solutions</h3>
+                            <p class="slide-desc" data-lang="feature3_desc_carousel">End-to-end support for contractors, investors, and architects.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature3_title">Custom Project Solutions</h3>
-                    <p class="text-gray-600" data-lang="feature3_desc">End-to-end support for construction contractors, investors, and architects—offering optimized solutions and showcasing our expertise through ongoing and completed projects.</p>
                 </div>
+            </div>
+
+            <!-- Carousel Navigation -->
+            <div class="carousel-nav max-w-5xl mx-auto">
+                <button class="carousel-button prev">
+                    <svg class="w-8 h-8 text-willkai-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="carousel-button next">
+                    <svg class="w-8 h-8 text-willkai-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                </button>
             </div>
         </div>
     </section>
@@ -277,6 +405,41 @@
     </section>
     <!-- ***** Fun Facts End ***** -->
 
+    <!-- ***** Clients and Partners Start ***** -->
+    <section id="clients-partners" class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="clients_title">Our Clients and Partners</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang="clients_subtitle">We are proud to collaborate with industry leaders who trust us to deliver excellence.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+                <!-- Client Logo 1 -->
+                <div class="scroll-animate">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+1" alt="Partner 1 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+                <!-- Client Logo 2 -->
+                <div class="scroll-animate" style="transition-delay: 100ms;">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+2" alt="Partner 2 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+                <!-- Client Logo 3 -->
+                <div class="scroll-animate" style="transition-delay: 200ms;">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+3" alt="Partner 3 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+                <!-- Client Logo 4 -->
+                <div class="scroll-animate" style="transition-delay: 300ms;">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+4" alt="Partner 4 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+                <!-- Client Logo 5 -->
+                <div class="scroll-animate" style="transition-delay: 400ms;">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+5" alt="Partner 5 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+                <!-- Client Logo 6 -->
+                <div class="scroll-animate" style="transition-delay: 500ms;">
+                    <img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+6" alt="Partner 6 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Clients and Partners End ***** -->
+
     <!-- ***** Testimonials Start ***** -->
     <section id="testimonials" class="py-20 bg-willkai-blue text-white">
         <div class="container mx-auto px-6 text-center">
@@ -365,12 +528,12 @@
                     welcome_button: "Discover More",
                     features_title: "What We Do",
                     features_subtitle: "At Willkai Window Co., Ltd., we specialize in aluminum and glass construction solutions tailored to meet the evolving needs of modern architecture and construction.",
-                    feature1_title: "Aluminum Fabrication & Installation",
-                    feature1_desc: "Precision-engineered aluminum systems for facades, windows, and structural components, delivered with efficient implementation and rapid turnaround times.",
-                    feature2_title: "Glass Construction & Facade Systems",
-                    feature2_desc: "Innovative glass applications and curtain wall systems that enhance both function and aesthetics, designed for high-performance building envelopes.",
-                    feature3_title: "Custom Project Solutions",
-                    feature3_desc: "End-to-end support for construction contractors, investors, and architects—offering optimized solutions and showcasing our expertise through ongoing and completed projects.",
+                    feature1_title_carousel: "Aluminum Fabrication & Installation",
+                    feature1_desc_carousel: "Precision-engineered aluminum systems for facades, windows, and structural components.",
+                    feature2_title_carousel: "Glass Construction & Facade Systems",
+                    feature2_desc_carousel: "Innovative glass applications and curtain wall systems that enhance function and aesthetics.",
+                    feature3_title_carousel: "Custom Project Solutions",
+                    feature3_desc_carousel: "End-to-end support for contractors, investors, and architects.",
                     process_title: "Our Proven Process",
                     process_subtitle: "We deliver aluminum and glass construction solutions through a streamlined, client-focused process that ensures quality, speed, and satisfaction.",
                     step1_title: "Consultation & Project Understanding",
@@ -386,6 +549,8 @@
                     project3_title: "ZLăt Factory", project3_location: "Binh Trieu",
                     project4_title: "Modern Hotel", project4_location: "Modern",
                     fact1: "Projects", fact2: "Happy Clients", fact3: "Awards Wins", fact4: "Countries",
+                    clients_title: "Our Clients and Partners",
+                    clients_subtitle: "We are proud to collaborate with industry leaders who trust us to deliver excellence.",
                     testimonials_title: "What Our Clients Say",
                     testimonial1_quote: '"Working with Willkai transformed our approach to market entry. Their insights were invaluable and led to a 200% increase in our quarterly growth. Highly recommended!"',
                     testimonial1_name: "Catherine D.", testimonial1_title: "CEO, Tech Innovators",
@@ -405,12 +570,12 @@
                     welcome_button: "Khám Phá Thêm",
                     features_title: "Dịch Vụ Của Chúng Tôi",
                     features_subtitle: "Tại Willkai Window Co., Ltd., chúng tôi chuyên về các giải pháp xây dựng nhôm kính được thiết kế để đáp ứng nhu cầu phát triển của kiến trúc và xây dựng hiện đại.",
-                    feature1_title: "Chế Tạo & Lắp Đặt Nhôm",
-                    feature1_desc: "Các hệ thống nhôm được chế tạo chính xác cho mặt dựng, cửa sổ và các bộ phận kết cấu, được triển khai hiệu quả và nhanh chóng.",
-                    feature2_title: "Hệ Thống Mặt Dựng & Xây Dựng Kính",
-                    feature2_desc: "Các ứng dụng kính và hệ thống tường kính sáng tạo giúp nâng cao cả chức năng và thẩm mỹ, được thiết kế cho các lớp vỏ tòa nhà hiệu suất cao.",
-                    feature3_title: "Giải Pháp Dự Án Tùy Chỉnh",
-                    feature3_desc: "Hỗ trợ toàn diện cho các nhà thầu xây dựng, nhà đầu tư và kiến trúc sư—cung cấp các giải pháp tối ưu và thể hiện chuyên môn của chúng tôi qua các dự án đang và đã hoàn thành.",
+                    feature1_title_carousel: "Chế Tạo & Lắp Đặt Nhôm",
+                    feature1_desc_carousel: "Các hệ thống nhôm được chế tạo chính xác cho mặt dựng, cửa sổ và các bộ phận kết cấu.",
+                    feature2_title_carousel: "Hệ Thống Mặt Dựng & Xây Dựng Kính",
+                    feature2_desc_carousel: "Các ứng dụng kính và hệ thống tường kính sáng tạo giúp nâng cao cả chức năng và thẩm mỹ.",
+                    feature3_title_carousel: "Giải Pháp Dự Án Tùy Chỉnh",
+                    feature3_desc_carousel: "Hỗ trợ toàn diện cho các nhà thầu xây dựng, nhà đầu tư và kiến trúc sư.",
                     process_title: "Quy Trình Chuyên Nghiệp Của Chúng Tôi",
                     process_subtitle: "Chúng tôi cung cấp các giải pháp xây dựng nhôm kính thông qua một quy trình tinh gọn, lấy khách hàng làm trung tâm, đảm bảo chất lượng, tốc độ và sự hài lòng.",
                     step1_title: "Tư Vấn & Thấu Hiểu Dự Án",
@@ -426,6 +591,8 @@
                     project3_title: "Nhà Máy Kéo ZLăt", project3_location: "Bình Triệu",
                     project4_title: "Khách Sạn Hiện Đại", project4_location: "Hiện đại",
                     fact1: "Dự Án", fact2: "Khách Hàng Hài Lòng", fact3: "Giải Thưởng", fact4: "Quốc Gia",
+                    clients_title: "Khách Hàng và Đối Tác Của Chúng Tôi",
+                    clients_subtitle: "Chúng tôi tự hào hợp tác với các nhà lãnh đạo ngành, những người tin tưởng chúng tôi để mang lại sự xuất sắc.",
                     testimonials_title: "Khách Hàng Nói Gì Về Chúng Tôi",
                     testimonial1_quote: '"Hợp tác với Willkai đã thay đổi cách tiếp cận của chúng tôi. Những hiểu biết của họ là vô giá và đã giúp chúng tôi tăng trưởng 200% hàng quý. Rất khuyến khích!"',
                     testimonial1_name: "Chị Catherine D.", testimonial1_title: "CEO, Nhà Đổi Mới Công Nghệ",
@@ -514,6 +681,67 @@
                     }
                 }, { threshold: 0.5 });
                 counterObserver.observe(funFactsSection);
+            }
+
+            // --- NEW FEATURES CAROUSEL LOGIC ---
+            const featuresCarousel = document.querySelector('#features .relative');
+            if (featuresCarousel) {
+                const track = featuresCarousel.querySelector('.carousel-track');
+                const slides = Array.from(track.children);
+                const nextButton = featuresCarousel.querySelector('.carousel-button.next');
+                const prevButton = featuresCarousel.querySelector('.carousel-button.prev');
+                const counterElement = featuresCarousel.querySelector('.carousel-counter');
+                let currentIndex = 0;
+
+                const updateCarousel = () => {
+                    slides.forEach((slide, index) => {
+                        slide.classList.remove('is-active', 'is-prev', 'is-next');
+                        if (index === currentIndex) {
+                            slide.classList.add('is-active');
+                        } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+                            slide.classList.add('is-prev');
+                        } else if (index === (currentIndex + 1) % slides.length) {
+                            slide.classList.add('is-next');
+                        }
+                    });
+                    counterElement.textContent = `${(currentIndex + 1).toString().padStart(2, '0')} / ${slides.length.toString().padStart(2, '0')}`;
+                };
+
+                nextButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                });
+
+                prevButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                });
+                
+                // Swipe functionality
+                let touchstartX = 0;
+                let touchendX = 0;
+
+                track.addEventListener('touchstart', function(event) {
+                    touchstartX = event.changedTouches[0].screenX;
+                }, false);
+
+                track.addEventListener('touchend', function(event) {
+                    touchendX = event.changedTouches[0].screenX;
+                    handleSwipe();
+                }, false); 
+                
+                function handleSwipe() {
+                    if (touchendX < touchstartX) { // Swiped left
+                        currentIndex = (currentIndex + 1) % slides.length;
+                        updateCarousel();
+                    }
+                    if (touchendX > touchstartX) { // Swiped right
+                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        updateCarousel();
+                    }
+                }
+
+                updateCarousel();
             }
         });
     </script>
