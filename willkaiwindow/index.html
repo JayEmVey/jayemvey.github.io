@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Willkai Window | Expert Aluminum & Glass Solutions</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-willkai-blue { background-color: #005F87; }
+        .text-willkai-blue { color: #005F87; }
+        .bg-willkai-pink { background-color: #009ED6; }
+        .text-willkai-pink { color: #009ED6; }
+        .border-willkai-pink { border-color: #009ED6; }
+        html { scroll-behavior: smooth; }
+        
+        /* Animation styles */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Language switcher styles */
+        .lang-switcher button {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .lang-switcher button.active {
+            background-color: #005F87;
+            color: white;
+        }
+
+        /* Hero Section Styles */
+        #welcome {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            color: white;
+        }
+        #hero-animation-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        #welcome .container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+        }
+
+        /* Generic Carousel Styles */
+        .carousel-section .carousel-viewport {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carousel-section .carousel-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .carousel-section .carousel-slide {
+            position: absolute;
+            width: 60%;
+            height: 90%;
+            border-radius: 1rem;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .carousel-section .carousel-slide .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+            color: white;
+            text-align: left;
+        }
+        .carousel-section .carousel-slide .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .carousel-section .carousel-slide .slide-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Slide states */
+        .carousel-section .carousel-slide.is-active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 20;
+            filter: blur(0px);
+        }
+        .carousel-section .carousel-slide.is-prev {
+            transform: translateX(-40%) scale(0.8);
+            opacity: 0.6;
+            z-index: 10;
+            filter: blur(4px);
+        }
+        .carousel-section .carousel-slide.is-next {
+            transform: translateX(40%) scale(0.8);
+            opacity: 0.6;
+            z-index: 10;
+            filter: blur(4px);
+        }
+        .carousel-section .carousel-slide:not(.is-active):not(.is-prev):not(.is-next) {
+            transform: scale(0.7);
+            opacity: 0;
+        }
+
+        /* Navigation Styles */
+        .carousel-section .carousel-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 30;
+            padding: 0 1rem;
+        }
+        .carousel-section .carousel-button {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+        .carousel-section .carousel-button:hover {
+            transform: scale(1.1);
+        }
+        .carousel-section .carousel-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 30;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-color: rgba(0,0,0,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+    </style>
+</head>
+<body class="bg-white text-gray-700">
+
+    <!-- ***** Header Area Start ***** -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center">
+                    <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/refs/heads/master/test/examples/assets/Willkai%20logo%20final%20final%20cropped.jpg" alt="Willkai Logo" class="h-12 w-auto">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_home">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_about">About</a>
+                    <a href="services.html" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_process">Services</a>
+                    <a href="projects.html" class="text-gray-600 hover:text-willkai-pink transition duration-300" data-lang="nav_projects">Projects</a>
+                    <a href="contact.html" class="bg-willkai-pink text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition duration-300" data-lang="nav_contact">Contact Us</a>
+                    <!-- Language Switcher (Desktop) -->
+                    <div class="lang-switcher flex items-center border border-gray-300 rounded-lg p-1 ml-4">
+                        <button id="lang-en-desktop" data-lang-switch="en">EN</button>
+                        <button id="lang-vi-desktop" data-lang-switch="vi">VI</button>
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-willkai-blue focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
+            <a href="index.html" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_home_mobile">Home</a>
+            <a href="about.html" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_about_mobile">About</a>
+            <a href="services.html" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_process_mobile">Services</a>
+            <a href="projects.html" class="block py-2 text-gray-600 hover:text-willkai-pink" data-lang="nav_projects_mobile">Projects</a>
+            <a href="contact.html" class="block mt-2 bg-willkai-pink text-white font-bold py-2 px-6 rounded-full text-center" data-lang="nav_contact_mobile">Contact Us</a>
+            <!-- Language Switcher (Mobile) -->
+            <div class="lang-switcher flex items-center justify-center border border-gray-300 rounded-lg p-1 mt-4 max-w-xs mx-auto">
+                <button id="lang-en-mobile" data-lang-switch="en">EN</button>
+                <button id="lang-vi-mobile" data-lang-switch="vi">VI</button>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Welcome Area Start ***** -->
+    <section id="welcome">
+        <canvas id="hero-animation-canvas"></canvas>
+        <div class="container mx-auto px-6 flex flex-col justify-center items-center text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4" data-lang="welcome_title">Expert Aluminum & Glass Solutions<span class="text-willkai-pink"> for Modern Construction</span></h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto" data-lang="welcome_subtitle">We work with contractors, architects, and investors to deliver high-quality facade systems and installations—on time, with precision.</p>
+            <a href="contact.html" class="bg-willkai-pink text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 text-lg" data-lang="welcome_button">Discover More</a>
+        </div>
+    </section>
+    <!-- ***** Welcome Area End ***** -->
+
+    <!-- ***** What We Do Section Start ***** -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="features_title">What We Do</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang="features_subtitle">At Willkai Window Co., Ltd., we specialize in aluminum and glass construction solutions tailored to meet the evolving needs of modern architecture and construction.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Item 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate">
+                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature1_title"></h3>
+                    <p class="text-gray-600" data-lang="feature1_desc"></p>
+                </div>
+                <!-- Feature Item 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate" style="transition-delay: 150ms;">
+                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature2_title"></h3>
+                    <p class="text-gray-600" data-lang="feature2_desc"></p>
+                </div>
+                <!-- Feature Item 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-animate" style="transition-delay: 300ms;">
+                    <div class="bg-willkai-pink text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="feature3_title"></h3>
+                    <p class="text-gray-600" data-lang="feature3_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** What We Do Section End ***** -->
+
+    <!-- ***** Work Process Start ***** -->
+    <section id="work-process" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="process_title">Our Proven Process</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="process_subtitle">We deliver aluminum and glass construction solutions through a streamlined, client-focused process that ensures quality, speed, and satisfaction.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="text-center max-w-xs scroll-animate">
+                    <div class="relative mb-4"><div class="bg-willkai-pink text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto text-2xl font-bold">1</div></div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="step1_title"></h3>
+                    <p class="text-gray-600" data-lang="step1_desc"></p>
+                </div>
+                <div class="hidden md:block text-willkai-pink text-4xl mx-4">→</div>
+                <div class="text-center max-w-xs scroll-animate" style="transition-delay: 150ms;">
+                    <div class="relative mb-4"><div class="bg-willkai-pink text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto text-2xl font-bold">2</div></div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="step2_title"></h3>
+                    <p class="text-gray-600" data-lang="step2_desc"></p>
+                </div>
+                <div class="hidden md:block text-willkai-pink text-4xl mx-4">→</div>
+                <div class="text-center max-w-xs scroll-animate" style="transition-delay: 300ms;">
+                    <div class="relative mb-4"><div class="bg-willkai-pink text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto text-2xl font-bold">3</div></div>
+                    <h3 class="text-xl font-bold text-willkai-blue mb-2" data-lang="step3_title"></h3>
+                    <p class="text-gray-600" data-lang="step3_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Work Process End ***** -->
+
+    <!-- ***** Featured Projects Start ***** -->
+    <section id="featured-projects" class="py-20 bg-gray-50 overflow-hidden carousel-section">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="projects_title">Featured Projects</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang="projects_subtitle">Explore a selection of our completed projects that showcase our commitment to quality and excellence.</p>
+        </div>
+        <div class="relative">
+            <div class="carousel-viewport">
+                <div class="carousel-track">
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/alu.jpg');">
+                        <div class="slide-content">
+                            <h3 class="slide-title" data-lang="project1_title"></h3>
+                            <p class="slide-desc" data-lang="project1_location"></p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/glass.jpg');">
+                        <div class="slide-content">
+                            <h3 class="slide-title" data-lang="project2_title"></h3>
+                            <p class="slide-desc" data-lang="project2_location"></p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/custom-prj.jpg');">
+                         <div class="slide-content">
+                            <h3 class="slide-title" data-lang="project3_title"></h3>
+                            <p class="slide-desc" data-lang="project3_location"></p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide" style="background-image: url('https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/03fff326bf2a3b77a7751975d99c83bb9083f199/test/examples/assets/alu2.jpg');">
+                         <div class="slide-content">
+                            <h3 class="slide-title" data-lang="project4_title"></h3>
+                            <p class="slide-desc" data-lang="project4_location"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav max-w-5xl mx-auto">
+                <button class="carousel-button prev"><svg class="w-8 h-8 text-willkai-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button>
+                <button class="carousel-button next"><svg class="w-8 h-8 text-willkai-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button>
+            </div>
+            <div class="carousel-counter"></div>
+        </div>
+    </section>
+    <!-- ***** Featured Projects End ***** -->
+
+    <!-- ***** Fun Facts Start ***** -->
+    <section id="fun-facts" class="py-20 bg-willkai-pink text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <h3 class="text-5xl font-extrabold mb-2 counter" data-target="126">0</h3>
+                    <p class="text-lg font-medium" data-lang="fact1">Projects</p>
+                </div>
+                <div>
+                    <h3 class="text-5xl font-extrabold mb-2 counter" data-target="63">0</h3>
+                    <p class="text-lg font-medium" data-lang="fact2">Happy Clients</p>
+                </div>
+                <div>
+                    <h3 class="text-5xl font-extrabold mb-2 counter" data-target="18">0</h3>
+                    <p class="text-lg font-medium" data-lang="fact3">Awards Wins</p>
+                </div>
+                <div>
+                    <h3 class="text-5xl font-extrabold mb-2 counter" data-target="27">0</h3>
+                    <p class="text-lg font-medium" data-lang="fact4">Countries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Fun Facts End ***** -->
+
+    <!-- ***** Clients and Partners Start ***** -->
+    <section id="clients-partners" class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="clients_title">Our Clients and Partners</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang="clients_subtitle">We are proud to collaborate with industry leaders who trust us to deliver excellence.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+                <div class="scroll-animate"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+1" alt="Partner 1 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="scroll-animate" style="transition-delay: 100ms;"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+2" alt="Partner 2 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="scroll-animate" style="transition-delay: 200ms;"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+3" alt="Partner 3 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="scroll-animate" style="transition-delay: 300ms;"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+4" alt="Partner 4 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="scroll-animate" style="transition-delay: 400ms;"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+5" alt="Partner 5 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="scroll-animate" style="transition-delay: 500ms;"><img src="https://placehold.co/150x80/d1d5db/374151?text=Partner+6" alt="Partner 6 Logo" class="mx-auto grayscale hover:grayscale-0 transition duration-300"></div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Clients and Partners End ***** -->
+
+    <!-- ***** Testimonials Start ***** -->
+    <section id="testimonials" class="py-20 bg-willkai-blue text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-12" data-lang="testimonials_title">What Our Clients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div class="bg-white bg-opacity-10 p-8 rounded-lg text-left scroll-animate">
+                    <p class="text-gray-200 mb-6 italic" data-lang="testimonial1_quote"></p>
+                    <div class="font-bold">
+                        <p class="text-white" data-lang="testimonial1_name"></p>
+                        <p class="text-willkai-pink text-sm" data-lang="testimonial1_title"></p>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-10 p-8 rounded-lg text-left scroll-animate" style="transition-delay: 150ms;">
+                    <p class="text-gray-200 mb-6 italic" data-lang="testimonial2_quote"></p>
+                    <div class="font-bold">
+                        <p class="text-white" data-lang="testimonial2_name"></p>
+                        <p class="text-willkai-pink text-sm" data-lang="testimonial2_title"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Testimonials End ***** -->
+
+    <!-- ***** Contact Us Start ***** -->
+    <section id="contact-us" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-willkai-blue mb-4" data-lang="contact_title">Get In Touch</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="contact_subtitle">Have a project in mind? Contact Willkai Window Co., Ltd. to request a quote or learn more about our services.</p>
+            </div>
+            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg scroll-animate">
+                <form action="mailto:quy.nguyen@willkaiwindow.com.vn" method="POST" enctype="text/plain">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 font-bold mb-2" data-lang="form_name">Full Name</label>
+                        <input type="text" id="name" name="Full Name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 font-bold mb-2" data-lang="form_email">Email Address</label>
+                        <input type="email" id="email" name="Email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-700 font-bold mb-2" data-lang="form_phone">Phone Number</label>
+                        <input type="tel" id="phone" name="Phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 font-bold mb-2" data-lang="form_message">Message</label>
+                        <textarea id="message" name="Message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-willkai-pink" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="w-full bg-willkai-pink text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 text-lg" data-lang="form_button">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Contact Us End ***** -->
+
+    <!-- ***** Footer Start ***** -->
+    <footer class="bg-willkai-blue text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-willkai-pink transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                <a href="#" class="hover:text-willkai-pink transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                <a href="#" class="hover:text-willkai-pink transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.011c0 4.434 2.865 8.18 6.839 9.491.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.011C22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
+            </div>
+            <p class="text-gray-400" data-lang="footer_copyright">&copy; 2025 WillKai. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript for Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- TRANSLATION DATA ---
+            const translations = {
+                en: {
+                    page_title: "Willkai | Expert Aluminum & Glass Solutions",
+                    nav_home: "Home", nav_about: "About", nav_process: "Process", nav_projects: "Projects", nav_testimonials: "Testimonials", nav_contact: "Contact Us",
+                    nav_home_mobile: "Home", nav_about_mobile: "About", nav_process_mobile: "Process", nav_projects_mobile: "Projects", nav_testimonials_mobile: "Testimonials", nav_contact_mobile: "Contact Us",
+                    welcome_title: 'Expert Aluminum & Glass Solutions<span class="text-willkai-pink"> for Modern Construction</span>',
+                    welcome_subtitle: "We work with contractors, architects, and investors to deliver high-quality facade systems and installations—on time, with precision.",
+                    welcome_button: "Discover More",
+                    features_title: "What We Do",
+                    features_subtitle: "At Willkai Window Co., Ltd., we specialize in aluminum and glass construction solutions tailored to meet the evolving needs of modern architecture and construction.",
+                    feature1_title: "Aluminum Fabrication & Installation",
+                    feature1_desc: "Precision-engineered aluminum systems for facades, windows, and structural components.",
+                    feature2_title: "Glass Construction & Facade Systems",
+                    feature2_desc: "Innovative glass applications and curtain wall systems that enhance function and aesthetics.",
+                    feature3_title: "Custom Project Solutions",
+                    feature3_desc: "End-to-end support for contractors, investors, and architects.",
+                    process_title: "Our Proven Process",
+                    process_subtitle: "We deliver aluminum and glass construction solutions through a streamlined, client-focused process that ensures quality, speed, and satisfaction.",
+                    step1_title: "Consultation & Project Understanding",
+                    step1_desc: "We begin by understanding the project requirements, design intent, and goals of investors, contractors, or architects.",
+                    step2_title: "Solution Design & Planning",
+                    step2_desc: "Our team proposes optimal aluminum and glass system solutions, tailored for efficient installation, durability, and architectural appeal.",
+                    step3_title: "Fabrication & Installation",
+                    step3_desc: "We execute with precision—manufacturing high-quality components and delivering rapid, on-site installation to meet demanding timelines.",
+                    projects_title: "Featured Projects",
+                    projects_subtitle: "Explore a selection of our completed projects that showcase our commitment to quality and excellence.",
+                    project1_title: "Office Building", project1_location: "Bien Hoa, Hoc Mon",
+                    project2_title: "Commercial Center", project2_location: "Binh Trong",
+                    project3_title: "ZLăt Factory", project3_location: "Binh Trieu",
+                    project4_title: "Modern Hotel", project4_location: "Modern",
+                    fact1: "Projects", fact2: "Happy Clients", fact3: "Awards Wins", fact4: "Countries",
+                    clients_title: "Our Clients and Partners",
+                    clients_subtitle: "We are proud to collaborate with industry leaders who trust us to deliver excellence.",
+                    testimonials_title: "What Our Clients Say",
+                    testimonial1_quote: '"Working with Willkai transformed our approach to market entry. Their insights were invaluable and led to a 200% increase in our quarterly growth. Highly recommended!"',
+                    testimonial1_name: "Catherine D.", testimonial1_title: "CEO, Tech Innovators",
+                    testimonial2_quote: '"The strategic plan they developed was not only brilliant but also practical. We were able to implement it seamlessly, and the results have been outstanding."',
+                    testimonial2_name: "Johnathan L.", testimonial2_title: "COO, Future Forward Inc.",
+                    contact_title: "Get In Touch",
+                    contact_subtitle: "Have a project in mind? Contact Willkai Window Co., Ltd. to request a quote or learn more about our services.",
+                    form_name: "Full Name", form_email: "Email Address", form_phone: "Phone Number", form_message: "Message", form_button: "Send Message",
+                    footer_copyright: "&copy; 2025 WillKai. All Rights Reserved."
+                },
+                vi: {
+                    page_title: "Willkai | Giải Pháp Nhôm Kính Chuyên Nghiệp",
+                    nav_home: "Trang Chủ", nav_about: "Về Chúng Tôi", nav_process: "Quy Trình", nav_projects: "Dự Án", nav_testimonials: "Khách Hàng Nói Gì", nav_contact: "Liên Hệ",
+                    nav_home_mobile: "Trang Chủ", nav_about_mobile: "Về Chúng Tôi", nav_process_mobile: "Quy Trình", nav_projects_mobile: "Dự Án", nav_testimonials_mobile: "Khách Hàng Nói Gì", nav_contact_mobile: "Liên Hệ",
+                    welcome_title: 'Giải Pháp Nhôm Kính Chuyên Nghiệp<span class="text-willkai-pink"> cho Xây Dựng Hiện Đại</span>',
+                    welcome_subtitle: "Chúng tôi hợp tác với các nhà thầu, kiến trúc sư và nhà đầu tư để cung cấp các hệ thống và lắp đặt mặt dựng chất lượng cao—đúng tiến độ, với độ chính xác cao.",
+                    welcome_button: "Khám Phá Thêm",
+                    features_title: "Dịch Vụ Của Chúng Tôi",
+                    features_subtitle: "Tại Willkai Window Co., Ltd., chúng tôi chuyên về các giải pháp xây dựng nhôm kính được thiết kế để đáp ứng nhu cầu phát triển của kiến trúc và xây dựng hiện đại.",
+                    feature1_title: "Chế Tạo & Lắp Đặt Nhôm",
+                    feature1_desc: "Các hệ thống nhôm được chế tạo chính xác cho mặt dựng, cửa sổ và các bộ phận kết cấu.",
+                    feature2_title: "Hệ Thống Mặt Dựng & Xây Dựng Kính",
+                    feature2_desc: "Các ứng dụng kính và hệ thống tường kính sáng tạo giúp nâng cao cả chức năng và thẩm mỹ.",
+                    feature3_title: "Giải Pháp Dự Án Tùy Chỉnh",
+                    feature3_desc: "Hỗ trợ toàn diện cho các nhà thầu xây dựng, nhà đầu tư và kiến trúc sư.",
+                    process_title: "Quy Trình Chuyên Nghiệp Của Chúng Tôi",
+                    process_subtitle: "Chúng tôi cung cấp các giải pháp xây dựng nhôm kính thông qua một quy trình tinh gọn, lấy khách hàng làm trung tâm, đảm bảo chất lượng, tốc độ và sự hài lòng.",
+                    step1_title: "Tư Vấn & Thấu Hiểu Dự Án",
+                    step1_desc: "Chúng tôi bắt đầu bằng việc tìm hiểu các yêu cầu của dự án, ý đồ thiết kế và mục tiêu của nhà đầu tư, nhà thầu hoặc kiến trúc sư.",
+                    step2_title: "Thiết Kế & Lên Kế Hoạch Giải Pháp",
+                    step2_desc: "Đội ngũ của chúng tôi đề xuất các giải pháp hệ thống nhôm kính tối ưu, được thiết kế để lắp đặt hiệu quả, bền bỉ và có tính thẩm mỹ kiến trúc.",
+                    step3_title: "Chế Tạo & Lắp Đặt",
+                    step3_desc: "Chúng tôi thực hiện với độ chính xác cao—sản xuất các bộ phận chất lượng cao và lắp đặt nhanh chóng tại công trường để đáp ứng các tiến độ khắt khe.",
+                    projects_title: "Dự Án Tiêu Biểu",
+                    projects_subtitle: "Khám phá một số dự án đã hoàn thành của chúng tôi, thể hiện cam kết về chất lượng và sự xuất sắc.",
+                    project1_title: "Tòa Nhà Văn Phòng", project1_location: "Biên Hòa, Hóc Môn",
+                    project2_title: "Trung Tâm Thương Mại", project2_location: "Bình Trọng",
+                    project3_title: "Nhà Máy Kéo ZLăt", project3_location: "Bình Triệu",
+                    project4_title: "Khách Sạn Hiện Đại", project4_location: "Hiện đại",
+                    fact1: "Dự Án", fact2: "Khách Hàng Hài Lòng", fact3: "Giải Thưởng", fact4: "Quốc Gia",
+                    clients_title: "Khách Hàng và Đối Tác Của Chúng Tôi",
+                    clients_subtitle: "Chúng tôi tự hào hợp tác với các nhà lãnh đạo ngành, những người tin tưởng chúng tôi để mang lại sự xuất sắc.",
+                    testimonials_title: "Khách Hàng Nói Gì Về Chúng Tôi",
+                    testimonial1_quote: '"Hợp tác với Willkai đã thay đổi cách tiếp cận của chúng tôi. Những hiểu biết của họ là vô giá và đã giúp chúng tôi tăng trưởng 200% hàng quý. Rất khuyến khích!"',
+                    testimonial1_name: "Chị Catherine D.", testimonial1_title: "CEO, Nhà Đổi Mới Công Nghệ",
+                    testimonial2_quote: '"Kế hoạch chiến lược mà họ phát triển không chỉ xuất sắc mà còn rất thực tế. Chúng tôi đã có thể triển khai một cách liền mạch và kết quả thật nổi bật."',
+                    testimonial2_name: "Anh Johnathan L.", testimonial2_title: "COO, Công Ty Tiên Phong Tương Lai",
+                    contact_title: "Liên Hệ",
+                    contact_subtitle: "Bạn có dự án cần triển khai? Hãy liên hệ Willkai Window Co., Ltd. để yêu cầu báo giá hoặc tìm hiểu thêm về dịch vụ của chúng tôi.",
+                    form_name: "Họ và Tên", form_email: "Địa Chỉ Email", form_phone: "Số Điện Thoại", form_message: "Lời Nhắn", form_button: "Gửi Tin Nhắn",
+                    footer_copyright: "&copy; 2025 WillKai. Bảo lưu mọi quyền."
+                }
+            };
+
+            // --- LANGUAGE SWITCHING LOGIC ---
+            const languageSwitchers = document.querySelectorAll('[data-lang-switch]');
+            const translatableElements = document.querySelectorAll('[data-lang]');
+            const pageTitle = document.getElementById('page-title');
+
+            const setLanguage = (lang) => {
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+                pageTitle.innerText = translations[lang].page_title;
+                localStorage.setItem('language', lang);
+
+                // Update active state on buttons
+                document.querySelectorAll('.lang-switcher button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll(`[data-lang-switch="${lang}"]`).forEach(btn => {
+                    btn.classList.add('active');
+                });
+            };
+
+            languageSwitchers.forEach(switcher => {
+                switcher.addEventListener('click', (e) => {
+                    setLanguage(e.target.getAttribute('data-lang-switch'));
+                });
+            });
+
+            // --- INITIALIZE PAGE ---
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+
+            // --- MOBILE MENU ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // --- SCROLL ANIMATIONS ---
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            const animationObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('in-view');
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => animationObserver.observe(el));
+
+            // --- COUNTER ANIMATION ---
+            const funFactsSection = document.getElementById('fun-facts');
+            if (funFactsSection) {
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    if (entries[0].isIntersecting) {
+                        const counters = funFactsSection.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            counter.innerText = '0';
+                            const updateCounter = () => {
+                                const current = +counter.innerText;
+                                const increment = target / 100;
+                                if (current < target) {
+                                    counter.innerText = `${Math.ceil(current + increment)}`;
+                                    setTimeout(updateCounter, 20);
+                                } else {
+                                    counter.innerText = target;
+                                }
+                            };
+                            updateCounter();
+                        });
+                        observer.unobserve(funFactsSection);
+                    }
+                }, { threshold: 0.5 });
+                counterObserver.observe(funFactsSection);
+            }
+
+            // --- CAROUSEL LOGIC ---
+            function initializeCarousel(carouselSelector) {
+                const carousel = document.querySelector(carouselSelector);
+                if (carousel) {
+                    const track = carousel.querySelector('.carousel-track');
+                    const slides = Array.from(track.children);
+                    const nextButton = carousel.querySelector('.carousel-button.next');
+                    const prevButton = carousel.querySelector('.carousel-button.prev');
+                    const counterElement = carousel.querySelector('.carousel-counter');
+                    let currentIndex = 0;
+
+                    const updateCarousel = () => {
+                        slides.forEach((slide, index) => {
+                            slide.classList.remove('is-active', 'is-prev', 'is-next');
+                            if (index === currentIndex) {
+                                slide.classList.add('is-active');
+                            } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+                                slide.classList.add('is-prev');
+                            } else if (index === (currentIndex + 1) % slides.length) {
+                                slide.classList.add('is-next');
+                            }
+                        });
+                        if(counterElement) {
+                           counterElement.textContent = `${(currentIndex + 1).toString().padStart(2, '0')} / ${slides.length.toString().padStart(2, '0')}`;
+                        }
+                    };
+
+                    if(nextButton && prevButton) {
+                        nextButton.addEventListener('click', () => {
+                            currentIndex = (currentIndex + 1) % slides.length;
+                            updateCarousel();
+                        });
+                        prevButton.addEventListener('click', () => {
+                            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                            updateCarousel();
+                        });
+                    }
+                    
+                    let touchstartX = 0;
+                    let touchendX = 0;
+                    if (track) {
+                        track.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX, false);
+                        track.addEventListener('touchend', e => {
+                            touchendX = e.changedTouches[0].screenX;
+                            if (touchendX < touchstartX) currentIndex = (currentIndex + 1) % slides.length;
+                            if (touchendX > touchstartX) currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                            updateCarousel();
+                        }, false); 
+                    }
+                    updateCarousel();
+                }
+            }
+            
+            initializeCarousel('#featured-projects');
+
+
+            // --- HERO CANVAS ANIMATION ---
+            const canvas = document.getElementById('hero-animation-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let animationFrameId;
+                let stars = [];
+                const cloud = { x: -200, y: 150, speed: 0.2 };
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+
+                function createStars() {
+                    stars = [];
+                    for (let i = 0; i < 200; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height * 0.8,
+                            radius: Math.random() * 1.5,
+                            alpha: Math.random() * 0.5 + 0.5,
+                            twinkleSpeed: Math.random() * 0.02
+                        });
+                    }
+                }
+
+                function drawStars(timeFactor) {
+                    let nightFactor = 0;
+                    if (timeFactor > 0.75 || timeFactor < 0.25) {
+                        nightFactor = (timeFactor > 0.75) ? (timeFactor - 0.75) * 4 : (0.25 - timeFactor) * 4;
+                    }
+                    if (nightFactor > 0) {
+                        stars.forEach(star => {
+                            ctx.beginPath();
+                            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                            const twinkleAlpha = star.alpha * (0.5 + Math.abs(Math.sin(Date.now() * star.twinkleSpeed)) * 0.5);
+                            ctx.fillStyle = `rgba(255, 255, 255, ${twinkleAlpha * nightFactor})`;
+                            ctx.fill();
+                        });
+                    }
+                }
+
+                function drawSunAndMoon(timeFactor) {
+                    const angle = timeFactor * 2 * Math.PI - Math.PI / 2;
+                    const radiusX = canvas.width / 2 + 50;
+                    const radiusY = canvas.height / 2 + 50;
+                    const x = canvas.width / 2 + radiusX * Math.cos(angle);
+                    const y = canvas.height * 0.8 + radiusY * Math.sin(angle);
+                    if (y < canvas.height * 0.8) {
+                        let sunAlpha = Math.max(0, Math.sin(timeFactor * Math.PI * 2));
+                        ctx.beginPath();
+                        ctx.arc(x, y, 40, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 229, 100, ${sunAlpha})`;
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(x, y, 60, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 229, 100, ${sunAlpha * 0.2})`;
+                        ctx.fill();
+                    } else {
+                        let moonAlpha = Math.max(0, Math.sin((timeFactor + 0.5) * Math.PI * 2));
+                         ctx.beginPath();
+                        ctx.arc(x, y, 30, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(230, 230, 250, ${moonAlpha})`;
+                        ctx.fill();
+                    }
+                }
+                
+                function drawClouds(timeFactor) {
+                    cloud.x += cloud.speed;
+                    if (cloud.x > canvas.width + 200) cloud.x = -200;
+                    let dayFactor = Math.max(0, 1 - Math.abs(timeFactor - 0.5) * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.4 * dayFactor})`;
+                    ctx.beginPath();
+                    ctx.ellipse(cloud.x, cloud.y, 100, 40, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(cloud.x + 80, cloud.y - 20, 80, 30, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                     ctx.beginPath();
+                    ctx.ellipse(cloud.x - 50, cloud.y + 10, 90, 35, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                function drawBuildings(timeFactor, skyTop, skyBottom) {
+                    const buildings = [
+                        { x: 0, w: 0.15, h: 0.6, color: '#262d3a' }, { x: 0.08, w: 0.1, h: 0.4, color: '#30384a' },
+                        { x: 0.15, w: 0.2, h: 0.75, color: '#2a3241' }, { x: 0.30, w: 0.15, h: 0.5, color: '#3c4659' },
+                        { x: 0.40, w: 0.25, h: 0.85, color: '#1f2633' }, { x: 0.60, w: 0.1, h: 0.65, color: '#353f50' },
+                        { x: 0.65, w: 0.2, h: 0.55, color: '#2f394b' }, { x: 0.80, w: 0.2, h: 0.7, color: '#262d3a' },
+                    ];
+                    const sunAngle = timeFactor * 2 * Math.PI - Math.PI / 2;
+                    const lightAngle = Math.cos(sunAngle);
+                    const lightIntensity = Math.max(0, Math.sin(timeFactor * Math.PI * 2));
+                    
+                    buildings.forEach(b => {
+                        const bx = b.x * canvas.width, bw = b.w * canvas.width, bh = b.h * canvas.height, by = canvas.height - bh;
+                        
+                        // Building Body
+                        ctx.fillStyle = b.color;
+                        ctx.fillRect(bx, by, bw, bh);
+
+                        // Aluminum Frames
+                        ctx.strokeStyle = 'rgba(150, 150, 150, 0.1)';
+                        ctx.lineWidth = 1;
+                        for(let i = 1; i < 10; i++) {
+                            ctx.beginPath();
+                            ctx.moveTo(bx + i * (bw/10), by);
+                            ctx.lineTo(bx + i * (bw/10), canvas.height);
+                            ctx.stroke();
+                        }
+                         for(let i = 1; i < 20; i++) {
+                            ctx.beginPath();
+                            ctx.moveTo(bx, by + i * (bh/20));
+                            ctx.lineTo(bx + bw, by + i * (bh/20));
+                            ctx.stroke();
+                        }
+
+
+                        // Glass Reflection
+                        const glassGradient = ctx.createLinearGradient(bx, by, bx, by + bh);
+                        glassGradient.addColorStop(0, skyTop);
+                        glassGradient.addColorStop(1, skyBottom);
+                        ctx.globalAlpha = 0.15;
+                        ctx.fillStyle = glassGradient;
+                        ctx.fillRect(bx, by, bw, bh);
+                        ctx.globalAlpha = 1;
+
+
+                        // Lighting/Shading
+                        if (lightIntensity > 0) {
+                            const gradient = ctx.createLinearGradient(bx, by, bx + bw, by);
+                            const highlightColor = `rgba(255, 255, 220, ${0.1 * lightIntensity})`;
+                            const shadowColor = `rgba(0, 0, 0, ${0.25 * lightIntensity})`;
+                            gradient.addColorStop(lightAngle > 0 ? 1 : 0, highlightColor);
+                            gradient.addColorStop(lightAngle > 0 ? 0 : 1, shadowColor);
+                            ctx.fillStyle = gradient;
+                            ctx.fillRect(bx, by, bw, bh);
+                        }
+
+                        // Windows at night
+                        const nightFactor = (timeFactor > 0.7 || timeFactor < 0.3) ? 1 : 0;
+                        if (nightFactor > 0) {
+                             for (let y = by + 20; y < canvas.height - 20; y += 40) {
+                                for (let x = bx + 20; x < bx + bw - 20; x += 40) {
+                                    if (Math.random() > 0.6) {
+                                        ctx.fillStyle = `rgba(255, 229, 100, ${Math.random() * 0.7 * nightFactor})`;
+                                        ctx.fillRect(x, y, 15, 25);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                };
+
+                const lerpColor = (a, b, amount) => {
+                    const ar = parseInt(a.slice(1,3), 16), ag = parseInt(a.slice(3,5), 16), ab = parseInt(a.slice(5,7), 16);
+                    const br = parseInt(b.slice(1,3), 16), bg = parseInt(b.slice(3,5), 16), bb = parseInt(b.slice(5,7), 16);
+                    const rr = Math.round(ar + amount * (br - ar)).toString(16).padStart(2, '0');
+                    const rg = Math.round(ag + amount * (bg - ag)).toString(16).padStart(2, '0');
+                    const rb = Math.round(ab + amount * (bb - ab)).toString(16).padStart(2, '0');
+                    return '#' + rr + rg + rb;
+                }
+
+                const animate = () => {
+                    const cycleDuration = 20000; // Faster 20 second cycle
+                    const time = (Date.now() % cycleDuration) / cycleDuration;
+                    
+                    const nightTop = '#000428', nightBottom = '#004e92', dawnTop = '#4e54c8', dawnBottom = '#8f94fb';
+                    const dayTop = '#87CEEB', dayBottom = '#f0f9ff', duskTop = '#ff7e5f', duskBottom = '#feb47b';
+                    let topColor, bottomColor;
+                    if (time < 0.25) { const t = time * 4; topColor = lerpColor(nightTop, dawnTop, t); bottomColor = lerpColor(nightBottom, dawnBottom, t); } 
+                    else if (time < 0.5) { const t = (time - 0.25) * 4; topColor = lerpColor(dawnTop, dayTop, t); bottomColor = lerpColor(dawnBottom, dayBottom, t); } 
+                    else if (time < 0.75) { const t = (time - 0.5) * 4; topColor = lerpColor(dayTop, duskTop, t); bottomColor = lerpColor(dayBottom, duskBottom, t); } 
+                    else { const t = (time - 0.75) * 4; topColor = lerpColor(duskTop, nightTop, t); bottomColor = lerpColor(duskBottom, nightBottom, t); }
+                    
+                    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                    gradient.addColorStop(0, topColor);
+                    gradient.addColorStop(1, bottomColor);
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    drawStars(time);
+                    drawSunAndMoon(time);
+                    drawClouds(time);
+                    drawBuildings(time, topColor, bottomColor);
+                    
+                    animationFrameId = requestAnimationFrame(animate);
+                };
+
+                resizeCanvas();
+                createStars();
+                animate();
+                window.addEventListener('resize', () => {
+                    cancelAnimationFrame(animationFrameId);
+                    resizeCanvas();
+                    createStars();
+                    animate();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
