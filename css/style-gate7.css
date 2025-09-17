@@ -1,0 +1,99 @@
+/* Basic Reset and Font Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #221F20;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden; 
+}
+
+/* Main Content Styling */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    padding: 20px;
+    position: relative;
+    
+    /* Apply blinking blur animation to the main content container */
+    animation: subtle-blink 2s infinite alternate ease-in-out;
+}
+
+.logo {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+/* Footer Styling */
+footer {
+    padding: 20px;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #999999;
+}
+
+/* Define the keyframes for the animation */
+@keyframes subtle-blink {
+    0% {
+        filter: blur(0.07rem);
+    }
+    100% {
+        filter: blur(0.17rem);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    p {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+    
+    .logo {
+        width: 140px;
+    }
+}
