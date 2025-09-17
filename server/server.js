@@ -6,7 +6,16 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['https://jayemvey.github.io', 'http://jayemvey.github.io'],
+    methods: ['GET', 'POST', 'HEAD'],
+    credentials: true
+}));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
 
 // Create reusable transporter object using SMTP transport
 const transporter = nodemailer.createTransport({

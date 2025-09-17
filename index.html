@@ -3,16 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gate 7 Coffee Roastery | Coming Soon</title>
+    <title>Gate 7 Coffee Roastery | Redirecting...</title>
+    <script>
+        // Redirect to Codespace URL
+        const codespaceUrl = 'https://redesigned-umbrella-gx4466ww4hpvr9-8000.app.github.dev';
+        
+        // Function to check if the Codespace is available
+        async function checkCodespaceAvailability() {
+            try {
+                const response = await fetch(codespaceUrl + '/api/health', {
+                    method: 'HEAD',
+                    mode: 'no-cors'
+                });
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Try to redirect, fallback to loading the static page if Codespace is not available
+        async function tryRedirect() {
+            const isCodespaceAvailable = await checkCodespaceAvailability();
+            
+            if (isCodespaceAvailable) {
+                window.location.href = codespaceUrl;
+            } else {
+                // If Codespace is not available, remove this script and load the static content
+                document.getElementById('redirect-message').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }
+        }
+
+        // Start the redirect process
+        tryRedirect();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style-gate7.css">
+    <style>
+        #redirect-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        #main-content {
+            display: none;
+        }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #C17817;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <div class="gradient-background"></div>
-    
-    <main>
+    <div id="redirect-message">
+        <h2>Redirecting to Gate 7 Coffee Roastery...</h2>
+        <div class="loader"></div>
+        <p>If you are not redirected automatically, <a href="https://redesigned-umbrella-gx4466ww4hpvr9-8000.app.github.dev">click here</a>.</p>
+    </div>
+
+    <div id="main-content">
+        <div class="gradient-background"></div>
+        
+        <main>
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/d047814bca5830b3076f59872d569b3a71581da8/logo-tmp.png" alt="Gate 7 Coffee Roastery Logo" class="logo">
         </div>
