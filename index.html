@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gate 7 Coffee – Coming Soon</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .background-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.08;
+      filter: blur(15px);
+      z-index: 0;
+      max-width: 90%;
+      max-height: 90%;
+      animation: fadeInBackground 2s ease-in-out;
+    }
+    .container {
+      max-width: 600px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      animation: fadeIn 1.2s ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+    .logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .email-form input[type="email"] {
+      padding: 10px;
+      width: 70%;
+      border: none;
+      border-radius: 8px;
+      margin-right: 5px;
+      font-size: 1rem;
+    }
+    .email-form button {
+      padding: 10px 20px;
+      background: #5c4033;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .email-form button:hover {
+      background: #3e2920;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInBackground {
+      from {opacity: 0;}
+      to {opacity: 0.08;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Logo -->
+  <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/d047814bca5830b3076f59872d569b3a71581da8/logo-tmp.png" alt="Gate 7 Logo" class="background-logo">
+
+  <div class="container">
+    <!-- Foreground Logo -->
+    <img src="./logo.png" alt="Gate 7 Logo" class="logo">
+    <h1>Gate 7 Coffee Roastery</h1>
+    <p>Your new departure gate to great coffee is opening soon.</p>
+
+    <form class="email-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Notify Me</button>
+    </form>
+
+    <p style="margin-top:30px; font-size:0.9rem; color:#aaa;">© 2025 Gate 7 Coffee Roastery</p>
+  </div>
+</body>
+</html>
