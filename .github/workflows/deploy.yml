@@ -1,0 +1,65 @@
+name: Deploy Node.js App
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install dependencies
+      run: |
+        cd server
+        npm ci
+
+    - name: Create deployment artifact
+      run: |
+        tar -czf deployment.tar.gz server/* index.html css/* 
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-artifact
+        path: deployment.tar.gz
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deploy-to-codespace.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: app-artifact
+
+    - name: Deploy to GitHub Codespace
+      id: deploy-to-codespace
+      uses: actions/create-github-codespace@v1
+      with:
+        repository: ${{ github.repository }}
+        ref: ${{ github.ref }}
+        machine_type: 'standardLinux'
+        post_create_command: |
+          tar -xzf deployment.tar.gz
+          cd server
+          npm install
+          npm start
+        env: |
+          PORT=3000
+          NODE_ENV=production

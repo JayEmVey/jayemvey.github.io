@@ -6,17 +6,117 @@
     <title>Gate 7 Coffee Roastery | Coming Soon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style-gate7.css">
 </head>
 <body>
+    <div class="gradient-background"></div>
+    
     <main>
-        <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/d047814bca5830b3076f59872d569b3a71581da8/logo-tmp.png" alt="Gate 7 Coffee Roastery Logo" class="logo">
-        <h1>Gate 7 Coffee Roastery</h1>
-        <p>Your new departure gate to great coffee is opening soon.</p>
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/JayEmVey/jayemvey.github.io/d047814bca5830b3076f59872d569b3a71581da8/logo-tmp.png" alt="Gate 7 Coffee Roastery Logo" class="logo">
+        </div>
+        
+        <h1 class="animate-text">Gate 7 Coffee Roastery</h1>
+        
+        <div class="tagline-container">
+            <p class="animate-text-delay">Your new departure gate to great coffee is opening soon.</p>
+        </div>
+        
+        <div class="notify-container">
+            <form id="notify-form" class="animate-text-delay">
+                <input type="email" name="email" placeholder="Enter your email for updates" required>
+                <button type="submit" class="notify-btn">
+                    <span>Notify Me</span>
+                </button>
+            </form>
+            <p id="form-message" class="form-message"></p>
+        </div>
     </main>
+
     <footer>
-        <p>&copy; 2025 Gate 7 Coffee Roastery</p>
+        <p class="animate-text-delay">&copy; 2025 Gate 7 Coffee Roastery</p>
     </footer>
+
+    <script>
+        document.getElementById('notify-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const email = form.email.value;
+            const button = form.querySelector('button');
+            const messageEl = document.getElementById('form-message');
+            
+            // Disable form while submitting
+            button.disabled = true;
+            button.innerHTML = '<span>Sending...</span>';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/subscribe', {
+                    method: 'POST',
+                    body: JSON.stringify({ email }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageEl.textContent = data.message;
+                    messageEl.className = 'form-message success';
+                    form.reset();
+                } else {
+                    throw new Error(data.message || 'Error sending email');
+                }
+            } catch (error) {
+                messageEl.textContent = error.message;
+                messageEl.className = 'form-message error';
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<span>Notify Me</span>';
+            }
+        });
+    </script>
+</body>
+</html>
+
+        // Countdown Timer
+        const countdownDate = new Date('October 1, 2025 00:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            // Update progress ring
+            const totalDuration = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+            const progress = (totalDuration - distance) / totalDuration;
+            const circle = document.querySelector('.progress-ring__circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const offset = circumference - (progress * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+
+        // Initial setup
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>

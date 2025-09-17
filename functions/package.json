@@ -1,0 +1,8 @@
+{
+  "name": "gate7-coffee-roastery",
+  "version": "1.0.0",
+  "description": "Gate 7 Coffee Roastery website",
+  "dependencies": {
+    "nodemailer": "^6.9.4"
+  }
+}

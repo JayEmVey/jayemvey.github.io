@@ -1,0 +1,77 @@
+const nodemailer = require('nodemailer');
+
+// Create reusable transporter object using SMTP transport
+const transporter = nodemailer.createTransport({
+  host: 'mail9046.maychuemail.com',
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: 'giang.ntt@gate7.vn',
+    pass: '77zEUbk3Y2'
+  }
+});
+
+exports.handler = async (event, context) => {
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  try {
+    const { email } = JSON.parse(event.body);
+
+    // Validate email
+    if (!email || !email.includes('@')) {
+      return { statusCode: 400, body: 'Invalid email address' };
+    }
+
+    // Email content
+    const mailOptions = {
+      from: '"Gate 7 Coffee Roastery" <giang.ntt@gate7.vn>',
+      to: email,
+      subject: 'Gate 7 Coffee Roastery is Opening Mid-October 2025',
+      text: `Dear Friend,
+
+We are delighted to announce that Gate 7 Coffee Roastery will officially open in mid-October 2025. Our management team is dedicated to delivering the finest coffee experience, and we are excited to welcome you to our new space.
+
+At Gate 7, every cup is crafted with precision, care, and a passion for excellence. We look forward to serving you soon and becoming your go-to destination for exceptional coffee.
+
+Warm regards,
+The Gate 7 Coffee Roastery Team`,
+      html: `<p>Dear Friend,</p>
+
+<p>We are delighted to announce that Gate 7 Coffee Roastery will officially open in mid-October 2025. Our management team is dedicated to delivering the finest coffee experience, and we are excited to welcome you to our new space.</p>
+
+<p>At Gate 7, every cup is crafted with precision, care, and a passion for excellence. We look forward to serving you soon and becoming your go-to destination for exceptional coffee.</p>
+
+<p>Warm regards,<br>
+The Gate 7 Coffee Roastery Team</p>`
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'Thank you for subscribing! Check your email for confirmation.' })
+    };
+
+  } catch (error) {
+    console.error('Error:', error);
+    let errorMessage = 'Error sending email. Please try again later.';
+    
+    // More specific error messages for common SMTP errors
+    if (error.code === 'ECONNREFUSED') {
+      errorMessage = 'Unable to connect to email server. Please try again later.';
+    } else if (error.code === 'ETIMEDOUT') {
+      errorMessage = 'Connection to email server timed out. Please try again later.';
+    } else if (error.responseCode >= 500) {
+      errorMessage = 'Email server error. Please try again later.';
+    }
+
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: errorMessage })
+    };
+  }
+};
